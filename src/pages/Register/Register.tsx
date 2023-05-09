@@ -8,12 +8,15 @@ import { useMutation } from '@tanstack/react-query'
 import Input from '../../components/Input'
 import { registerAccount } from '../../apis/register.api'
 import { omit } from 'lodash'
+import { isAxiosError, isAxiosUnprocessableEntity } from '../../utils/utils'
+import { ResponseApi } from '../../types/utils.type'
 export type FormState = Schema
 
 export default function Register() {
   const {
     formState: { errors },
     register,
+    setError,
     handleSubmit
   } = useForm<FormState>({
     resolver: yupResolver(schema)
@@ -27,6 +30,21 @@ export default function Register() {
     registerMutation.mutate(body, {
       onSuccess: (data) => {
         console.log(data)
+      },
+      onError: (error) => {
+        console.log(error)
+
+        if (isAxiosUnprocessableEntity<ResponseApi<Omit<FormState, 'confirm_password'>>>(error)) {
+          const formError = error.response?.data.data
+          if (formError) {
+            Object.keys(formError).forEach((key) => {
+              setError(key as keyof Omit<FormState, 'confirm_password'>, {
+                type: 'Server',
+                message: formError[key as keyof Omit<FormState, 'confirm_password'>]
+              })
+            })
+          }
+        }
       }
     })
   })
