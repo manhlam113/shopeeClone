@@ -3,22 +3,34 @@ import { Link } from 'react-router-dom'
 import { Schema, schema } from '../../utils/rules'
 // eslint-disable-next-line import/no-unresolved
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useMutation } from '@tanstack/react-query'
 
 import Input from '../../components/Input'
-export type ErrorForm = Schema
+import { registerAccount } from '../../apis/register.api'
+import { omit } from 'lodash'
+export type FormState = Schema
 
 export default function Register() {
   const {
     formState: { errors },
     register,
     handleSubmit
-  } = useForm<ErrorForm>({
+  } = useForm<FormState>({
     resolver: yupResolver(schema)
+  })
+  const registerMutation = useMutation({
+    mutationFn: (body: Omit<FormState, 'confirm_password'>) => registerAccount(body)
   })
 
   const onSubmit = handleSubmit((data) => {
-    console.log('Data', data)
+    const body = omit(data, ['confirm_password'])
+    registerMutation.mutate(body, {
+      onSuccess: (data) => {
+        console.log(data)
+      }
+    })
   })
+
   return (
     <div className='bg-orange'>
       <div className='container'>
