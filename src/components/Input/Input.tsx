@@ -1,4 +1,3 @@
-import { ErrorForm } from '../../pages/Register/Register'
 import type { UseFormRegister, FieldErrors, RegisterOptions } from 'react-hook-form'
 interface InputProps {
   type: React.HTMLInputTypeAttribute
@@ -6,6 +5,7 @@ interface InputProps {
   className?: string
   placeholder?: string
   name: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: UseFormRegister<any>
   rules?: RegisterOptions
 }

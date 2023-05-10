@@ -8,8 +8,10 @@ import { useMutation } from '@tanstack/react-query'
 import Input from '../../components/Input'
 import { registerAccount } from '../../apis/register.api'
 import { omit } from 'lodash'
-import { isAxiosError, isAxiosUnprocessableEntity } from '../../utils/utils'
+import { isAxiosUnprocessableEntity } from '../../utils/utils'
 import { ResponseApi } from '../../types/utils.type'
+import { toast } from 'react-toastify'
+
 export type FormState = Schema
 
 export default function Register() {
@@ -28,12 +30,10 @@ export default function Register() {
   const onSubmit = handleSubmit((data) => {
     const body = omit(data, ['confirm_password'])
     registerMutation.mutate(body, {
-      onSuccess: (data) => {
-        console.log(data)
+      onSuccess: (_) => {
+        toast.success('Create account successfully')
       },
       onError: (error) => {
-        console.log(error)
-
         if (isAxiosUnprocessableEntity<ResponseApi<Omit<FormState, 'confirm_password'>>>(error)) {
           const formError = error.response?.data.data
           if (formError) {
