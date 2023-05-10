@@ -23,6 +23,7 @@ class Http {
           const message = data.message || error.message
           toast.error(message)
         }
+        return Promise.reject(error)
       }
     )
   }
