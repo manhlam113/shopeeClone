@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import Popover from '../Popover'
+
 export default function Header() {
   return (
     <div className='bg-[linear-gradient(-180deg,#f53d2d,#f63)] pb-5 pt-2 text-white'>
@@ -11,7 +13,18 @@ export default function Header() {
             <div className='mr-2 border-r-2 pr-2'>Kết nối</div>
           </div>
           <div className='navbar-right flex'>
-            <div className='flex cursor-pointer items-center py-1 hover:text-gray-300'>
+            <Popover
+              as='span'
+              className='flex cursor-pointer items-center py-1 hover:text-gray-300'
+              renderPopover={
+                <div className='relative rounded-sm border border-gray-200 bg-white shadow-md'>
+                  <div className='flex flex-col py-2 pl-3 pr-28'>
+                    <button className='px-3 py-2 text-left hover:text-orange'>Tiếng Việt</button>
+                    <button className='mt-2 px-3 py-2  text-left hover:text-orange'>English</button>
+                  </div>
+                </div>
+              }
+            >
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 fill='none'
@@ -37,8 +50,29 @@ export default function Header() {
               >
                 <path strokeLinecap='round' strokeLinejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5' />
               </svg>
-            </div>
-            <div className='ml-6 flex cursor-pointer items-center py-1 hover:text-gray-300'>
+            </Popover>
+            <Popover
+              className='hover:text-gray-300s ml-6 flex cursor-pointer items-center py-1'
+              renderPopover={
+                <div className='relative rounded-sm border border-gray-200 bg-white shadow-md'>
+                  <Link
+                    to='/'
+                    className='block w-full bg-white px-4 py-3 text-left hover:bg-slate-100 hover:text-cyan-500'
+                  >
+                    Tài khoản của tôi
+                  </Link>
+                  <Link
+                    to='/'
+                    className='block w-full bg-white px-4 py-3 text-left hover:bg-slate-100 hover:text-cyan-500'
+                  >
+                    Đơn mua
+                  </Link>
+                  <button className='block w-full bg-white px-4 py-3 text-left hover:bg-slate-100 hover:text-cyan-500'>
+                    Đăng xuất
+                  </button>
+                </div>
+              }
+            >
               <div className='mr-2 h-6 w-6 flex-shrink-0'>
                 <img
                   src='https://cf.shopee.vn/file/d04ea22afab6e6d250a370d7ccc2e675_tn'
@@ -46,8 +80,9 @@ export default function Header() {
                   className='h-full w-full rounded-full object-cover'
                 />
               </div>
-              <div>duthanhduoc</div>
-            </div>
+              <div>manhvanlam</div>
+            </Popover>
+            <div className='ml-6 flex cursor-pointer items-center py-1 hover:text-gray-300'></div>
           </div>
         </div>
         <div className='mt-4 grid grid-cols-12 items-end gap-4'>
