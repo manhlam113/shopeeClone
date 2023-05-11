@@ -10,11 +10,12 @@ import Input from '../../components/Input'
 import { useContext } from 'react'
 import { AppContext } from '../../context/authenticated.context'
 import Button from '../../components/Button/Button'
+import { path } from '../../constants/path'
 
 type FormState = Omit<Schema, 'confirm_password'>
 export default function Login() {
   const navigate = useNavigate()
-  const { setIsAuthenticated } = useContext(AppContext)
+  const { setIsAuthenticated, setProfile } = useContext(AppContext)
   const loginSchema = schema.omit(['confirm_password'])
   const {
     formState: { errors },
@@ -30,7 +31,8 @@ export default function Login() {
   const onSubmit = handleSubmit((data) => {
     //data này là data trả về khi thành công
     loginMutation.mutate(data, {
-      onSuccess: () => {
+      onSuccess: (data) => {
+        setProfile(data.data.data.user)
         setIsAuthenticated(true)
         navigate('/')
       },
@@ -83,7 +85,7 @@ export default function Login() {
               </div>
               <div className='mt-8 flex items-center justify-center'>
                 <span className='text-gray-400'>Bạn chưa có tài khoản?</span>
-                <Link className='ml-1 text-red-400' to='/register'>
+                <Link className='ml-1 text-red-400' to={path.register}>
                   Đăng ký
                 </Link>
               </div>

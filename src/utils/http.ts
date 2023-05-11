@@ -2,10 +2,11 @@ import axios, { AxiosError, AxiosInstance } from 'axios'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import HttpStatusCode from '../constants/httpCode'
-import { getAccessTokenToLocalStorage, setAccessTokenToLocalStorage } from './utils.auth'
+import { getAccessTokenToLocalStorage, setAccessTokenToLocalStorage, setProfileToLocalStorage } from './utils.auth'
 import { AuthResponse } from '../types/auth.type'
-import { clearAccessTokenAtLocalStorage } from './utils.auth'
+import { clearLS } from './utils.auth'
 import { error } from 'console'
+import { path } from '../constants/path'
 class Http {
   instance: AxiosInstance
   private accessToken: string
@@ -27,6 +28,11 @@ class Http {
      *
      *
      */
+    //interceptor của request thì ko cần phân biệt url là login hay register bởi vì
+    /* các url khác mà cần token để authenticated nên ta sẽ viết nó 1 cách bao quát
+     *
+     *
+     */
     this.instance.interceptors.request.use(
       (config) => {
         if (config.headers && this.accessToken) config.headers.authorization = this.accessToken
@@ -34,21 +40,38 @@ class Http {
       },
       (error) => {
         return Promise.reject(error)
+        /**
+         * tại sao phải Promise.reject(error) => để khi nó lỗi nó sẽ nhảy vào catch của các tác vụ promise
+         * để bắt lỗi
+         *
+         */
       }
     )
     this.instance.interceptors.response.use(
       (response) => {
         const { url } = response.config
-        if (url === '/login' || url === '/register') {
+        /**
+         * ở đây mình kiểm tra url bởi vì 2 tác vụ login và register sẽ trả về token
+         *  tại đây mình sẽ set nó ở localstorage
+         *
+         */
+        if (url === path.login || url === path.register) {
           this.accessToken = (response.data as AuthResponse).data?.access_token
           setAccessTokenToLocalStorage(this.accessToken)
-        } else if (url === '/logout') {
+          setProfileToLocalStorage(response.data.data.user)
+        } else if (url === path.logout) {
           this.accessToken = ''
-          clearAccessTokenAtLocalStorage()
+          clearLS()
         }
         return response
       },
       function (error: AxiosError) {
+        /**
+         * Đây là functuion bắt lỗi chung trong axios
+         *  câu if đầu tiên là nếu lỗi là lỗi liên quan đến 404 không phải là lỗi 422
+         *  thì sẽ có toast ra ngoài giao diện
+         *  ko thì promise.reject
+         */
         if (error.response?.status !== HttpStatusCode.UnprocessableEntity) {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const data: any | undefined = error.response?.data

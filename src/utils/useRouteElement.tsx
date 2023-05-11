@@ -7,12 +7,13 @@ import MainLayout from '../layout/MainLayout'
 import Profile from '../pages/Profile'
 import { useContext } from 'react'
 import { AppContext } from '../context/authenticated.context'
+import { path } from '../constants/path'
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
-  return isAuthenticated ? <Outlet /> : <Navigate to='/login' />
+  return isAuthenticated ? <Outlet /> : <Navigate to={path.login} />
 }
 function RejectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -25,7 +26,7 @@ export default function useRouteElement() {
       element: <RejectedRoute />,
       children: [
         {
-          path: '/register',
+          path: path.register,
           element: (
             <RegisterLayout>
               <Register />
@@ -33,7 +34,7 @@ export default function useRouteElement() {
           )
         },
         {
-          path: '/login',
+          path: path.login,
           element: (
             <RegisterLayout>
               <Login />
@@ -47,7 +48,7 @@ export default function useRouteElement() {
       element: <ProtectedRoute />,
       children: [
         {
-          path: 'profile',
+          path: path.profile,
           element: (
             <MainLayout>
               <Profile />
@@ -56,6 +57,14 @@ export default function useRouteElement() {
         }
       ]
     },
+    /**
+     *
+     * Tại sao thằng này ko có component Protected và Rejected
+     * bởi vì behavior tại đây là muốn người dùng dù không đăng nhập
+     *  hay chưa đăng nhập thì vẫn vào được
+     *  + khi họ logout tại trang product list nó chỉ yêu cầu họ đăng nhập nếu muốn chứ k
+     * phải là navigate họ về trang login
+     */
     {
       path: '',
       index: true,

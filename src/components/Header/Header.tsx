@@ -1,12 +1,13 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Popover from '../Popover'
 import { useContext } from 'react'
 import { AppContext } from '../../context/authenticated.context'
 import { logOut } from '../../apis/register.api'
 import { useMutation } from '@tanstack/react-query'
+import { path } from '../../constants/path'
 
 export default function Header() {
-  const { isAuthenticated, setIsAuthenticated } = useContext(AppContext)
+  const { isAuthenticated, setIsAuthenticated, profile } = useContext(AppContext)
   const logoutMutation = useMutation({
     mutationFn: logOut,
     onSuccess: () => {
@@ -98,16 +99,16 @@ export default function Header() {
                     className='h-full w-full rounded-full object-cover'
                   />
                 </div>
-                <div>manhvanlam</div>
+                <div>{profile?.email}</div>
               </Popover>
             )}
             {!isAuthenticated && (
               <div className='flex items-center'>
-                <Link to={'/login'} className='ml-2'>
+                <Link to={path.login} className='ml-2'>
                   Đăng nhập
                 </Link>
                 <div className='ml-2 h-4 border-r-2 border-r-white/40'></div>
-                <Link to={'/register'} className='ml-2'>
+                <Link to={path.register} className='ml-2'>
                   Đăng ký
                 </Link>
               </div>

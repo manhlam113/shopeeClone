@@ -13,6 +13,7 @@ import { ResponseApiFail } from '../../types/utils.type'
 import { useContext } from 'react'
 import { AppContext } from '../../context/authenticated.context'
 import Button from '../../components/Button/Button'
+import { path } from '../../constants/path'
 
 export type FormState = Schema
 
@@ -86,15 +87,16 @@ export default function Register() {
               <div className='mt-3'>
                 <Button
                   isLoading={registerMutation.isLoading}
+                  // isLoading={true}
                   disabled={registerMutation.isLoading}
-                  className='w-full bg-red-500 px-2 py-4 text-center text-sm uppercase text-white hover:bg-red-600'
+                  className='flex w-full items-center justify-center bg-red-500 px-2 py-4 text-center text-sm uppercase text-white hover:bg-red-600'
                 >
                   Đăng ký
                 </Button>
               </div>
               <div className='mt-8 flex items-center justify-center'>
                 <span className='text-gray-400'>Bạn đã có tài khoản?</span>
-                <Link className='ml-1 text-red-400' to='/login'>
+                <Link className='ml-1 text-red-400' to={path.login}>
                   Đăng nhập
                 </Link>
               </div>
