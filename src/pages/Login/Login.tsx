@@ -9,11 +9,12 @@ import { ResponseApiFail } from '../../types/utils.type'
 import Input from '../../components/Input'
 import { useContext } from 'react'
 import { AppContext } from '../../context/authenticated.context'
+import Button from '../../components/Button/Button'
 
 type FormState = Omit<Schema, 'confirm_password'>
 export default function Login() {
   const navigate = useNavigate()
-  const { isAuthenticated, setIsAuthenticated } = useContext(AppContext)
+  const { setIsAuthenticated } = useContext(AppContext)
   const loginSchema = schema.omit(['confirm_password'])
   const {
     formState: { errors },
@@ -72,9 +73,13 @@ export default function Login() {
                 placeholder='Password'
               />
               <div className='mt-3'>
-                <button className='w-full bg-red-500 px-2 py-4 text-center text-sm uppercase text-white hover:bg-red-600'>
+                <Button
+                  isLoading={loginMutation.isLoading}
+                  disabled={loginMutation.isLoading}
+                  className='flex w-full items-center justify-center bg-red-500 px-2 py-4 text-white'
+                >
                   Đăng nhập
-                </button>
+                </Button>
               </div>
               <div className='mt-8 flex items-center justify-center'>
                 <span className='text-gray-400'>Bạn chưa có tài khoản?</span>

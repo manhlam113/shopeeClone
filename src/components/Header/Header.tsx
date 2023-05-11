@@ -3,12 +3,18 @@ import Popover from '../Popover'
 import { useContext } from 'react'
 import { AppContext } from '../../context/authenticated.context'
 import { logOut } from '../../apis/register.api'
+import { useMutation } from '@tanstack/react-query'
 
 export default function Header() {
   const { isAuthenticated, setIsAuthenticated } = useContext(AppContext)
+  const logoutMutation = useMutation({
+    mutationFn: logOut,
+    onSuccess: () => {
+      setIsAuthenticated(false)
+    }
+  })
   const handleLogOut = () => {
-    logOut()
-    setIsAuthenticated(false)
+    logoutMutation.mutate()
   }
   return (
     <div className='bg-[linear-gradient(-180deg,#f53d2d,#f63)] pb-5 pt-2 text-white'>
@@ -65,7 +71,7 @@ export default function Header() {
                 renderPopover={
                   <div className='relative rounded-sm border border-gray-200 bg-white shadow-md'>
                     <Link
-                      to='/'
+                      to='/profile'
                       className='block w-full bg-white px-4 py-3 text-left hover:bg-slate-100 hover:text-cyan-500'
                     >
                       Tài khoản của tôi

@@ -12,6 +12,7 @@ import { isAxiosUnprocessableEntity } from '../../utils/utils'
 import { ResponseApiFail } from '../../types/utils.type'
 import { useContext } from 'react'
 import { AppContext } from '../../context/authenticated.context'
+import Button from '../../components/Button/Button'
 
 export type FormState = Schema
 
@@ -32,7 +33,7 @@ export default function Register() {
   const onSubmit = handleSubmit((data) => {
     const body = omit(data, ['confirm_password'])
     registerMutation.mutate(body, {
-      onSuccess: (_) => {
+      onSuccess: () => {
         setIsAuthenticated(true)
       },
       onError: (error) => {
@@ -83,9 +84,13 @@ export default function Register() {
                 placeholder='Confirm Password'
               />
               <div className='mt-3'>
-                <button className='w-full bg-red-500 px-2 py-4 text-center text-sm uppercase text-white hover:bg-red-600'>
+                <Button
+                  isLoading={registerMutation.isLoading}
+                  disabled={registerMutation.isLoading}
+                  className='w-full bg-red-500 px-2 py-4 text-center text-sm uppercase text-white hover:bg-red-600'
+                >
                   Đăng ký
-                </button>
+                </Button>
               </div>
               <div className='mt-8 flex items-center justify-center'>
                 <span className='text-gray-400'>Bạn đã có tài khoản?</span>
