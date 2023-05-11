@@ -9,11 +9,14 @@ import Input from '../../components/Input'
 import { registerAccount } from '../../apis/register.api'
 import { omit } from 'lodash'
 import { isAxiosUnprocessableEntity } from '../../utils/utils'
-import { ResponseApi } from '../../types/utils.type'
+import { ResponseApiFail } from '../../types/utils.type'
+import { useContext } from 'react'
+import { AppContext } from '../../context/authenticated.context'
 
 export type FormState = Schema
 
 export default function Register() {
+  const { isAuthenticated, setIsAuthenticated } = useContext(AppContext)
   const {
     formState: { errors },
     register,
@@ -29,11 +32,11 @@ export default function Register() {
   const onSubmit = handleSubmit((data) => {
     const body = omit(data, ['confirm_password'])
     registerMutation.mutate(body, {
-      onSuccess: (data) => {
-        console.log(data)
+      onSuccess: (_) => {
+        setIsAuthenticated(true)
       },
       onError: (error) => {
-        if (isAxiosUnprocessableEntity<ResponseApi<Omit<FormState, 'confirm_password'>>>(error)) {
+        if (isAxiosUnprocessableEntity<ResponseApiFail<Omit<FormState, 'confirm_password'>>>(error)) {
           const formError = error.response?.data.data
           if (formError) {
             Object.keys(formError).forEach((key) => {
