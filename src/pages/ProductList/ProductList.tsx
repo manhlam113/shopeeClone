@@ -12,7 +12,6 @@ export default function ProductList() {
     queryKey: [queryKey.products, queryParams],
     queryFn: () => productApi.getProductList(queryParams)
   })
-  console.log('DATA', data)
 
   return (
     <div className='py-6'>
@@ -24,11 +23,10 @@ export default function ProductList() {
           <div className='col-span-9'>
             <SortProduct></SortProduct>
             <div className='grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4'>
-              {Array(100)
-                .fill(0)
-                .map((_, index) => {
-                  return <Product key={index}></Product>
-                })}
+              {data &&
+                data.data.data.products.map((productItem) => (
+                  <Product key={productItem._id} productItem={productItem}></Product>
+                ))}
             </div>
           </div>
         </div>
