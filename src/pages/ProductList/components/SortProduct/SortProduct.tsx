@@ -10,7 +10,7 @@ export default function SortProduct() {
             <button className=' bg-white/80 px-4 py-2  hover:bg-slate-100'>Bán chạy</button>
             <select
               className='bg-white px-4 py-2 text-left capitalize text-black outline-none hover:bg-slate-100'
-              value=''
+              defaultValue=''
             >
               <option value='' disabled>
                 Giá

@@ -6,7 +6,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation } from '@tanstack/react-query'
 
 import Input from '../../components/Input'
-import { registerAccount } from '../../apis/register.api'
 import { omit } from 'lodash'
 import { isAxiosUnprocessableEntity } from '../../utils/utils'
 import { ResponseApiFail } from '../../types/utils.type'
@@ -14,6 +13,7 @@ import { useContext } from 'react'
 import { AppContext } from '../../context/authenticated.context'
 import Button from '../../components/Button/Button'
 import { path } from '../../constants/path'
+import authApi from '../../apis/auth.api'
 
 export type FormState = Schema
 
@@ -28,7 +28,7 @@ export default function Register() {
     resolver: yupResolver(schema)
   })
   const registerMutation = useMutation({
-    mutationFn: (body: Omit<FormState, 'confirm_password'>) => registerAccount(body)
+    mutationFn: (body: Omit<FormState, 'confirm_password'>) => authApi.registerAccount(body)
   })
 
   const onSubmit = handleSubmit((data) => {

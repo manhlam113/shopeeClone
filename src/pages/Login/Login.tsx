@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Schema, schema } from '../../utils/rules'
 import { useMutation } from '@tanstack/react-query'
-import { loginAccount } from '../../apis/register.api'
 import { isAxiosUnprocessableEntity } from '../../utils/utils'
 import { ResponseApiFail } from '../../types/utils.type'
 import Input from '../../components/Input'
@@ -11,6 +10,7 @@ import { useContext } from 'react'
 import { AppContext } from '../../context/authenticated.context'
 import Button from '../../components/Button/Button'
 import { path } from '../../constants/path'
+import authApi from '../../apis/auth.api'
 
 type FormState = Omit<Schema, 'confirm_password'>
 export default function Login() {
@@ -26,7 +26,7 @@ export default function Login() {
     resolver: yupResolver(loginSchema)
   })
   const loginMutation = useMutation({
-    mutationFn: (body: FormState) => loginAccount(body)
+    mutationFn: (body: FormState) => authApi.loginAccount(body)
   })
   const onSubmit = handleSubmit((data) => {
     //data này là data trả về khi thành công
