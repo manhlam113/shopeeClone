@@ -1,5 +1,5 @@
 import { InputHTMLAttributes } from 'react'
-import type { UseFormRegister, FieldErrors, RegisterOptions } from 'react-hook-form'
+import type { UseFormRegister, RegisterOptions } from 'react-hook-form'
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   errorMessage?: string
   className?: string
@@ -10,20 +10,19 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   rules?: RegisterOptions
 }
 export default function Input({
-  type,
   className,
   classNameInput = 'w-full rounded-sm border border-gray-300 p-3 outline-none focus:border-gray-500 focus:shadow-sm',
   classNameError = 'mt-1 min-h-[1rem] text-sm text-red-600',
-  name,
-  placeholder,
   register,
   errorMessage,
-  rules
+  rules,
+  name,
+  ...rest
 }: InputProps) {
   const registerResult = register && name ? register(name, rules) : {}
   return (
     <div className={className}>
-      <input type={type} className={classNameInput} placeholder={placeholder} {...registerResult} />
+      <input className={classNameInput} {...rest} {...registerResult} />
       <div className={classNameError}>{errorMessage}</div>
     </div>
   )

@@ -22,3 +22,6 @@ export const formatNumberToSocialStyle = (number: number) => {
     .replace('.', ',')
     .toLowerCase()
 }
+export type NoUndefinedField<T> = {
+  [P in keyof T]-?: NoUndefinedField<NonNullable<T[P]>>
+}
