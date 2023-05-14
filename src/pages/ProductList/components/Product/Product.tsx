@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Product as ProductType } from '../../../../types/product.type'
-import { formatNumberToCurrency, formatNumberToSocialStyle } from '../../../../utils/utils'
+import { formatNumberToCurrency, formatNumberToSocialStyle, generateURLProductDetail } from '../../../../utils/utils'
 import ProductRating from '../ProductRating'
 import { path } from '../../../../constants/path'
 type ProductItem = {
@@ -9,7 +9,7 @@ type ProductItem = {
 export default function Product(props: ProductItem) {
   const { productItem } = props
   return (
-    <Link to={`${path.home}${productItem._id}`}>
+    <Link to={`${path.home}${generateURLProductDetail(productItem.name, productItem._id)}`}>
       <div className='overflow-hidden rounded-sm bg-white shadow transition-transform duration-100 hover:translate-y-[-0.04rem] hover:shadow-lg'>
         <div className='relative w-full pt-[100%]'>
           <img src={productItem.image} alt='' className='absolute left-0 top-0 h-full w-full bg-white object-cover' />

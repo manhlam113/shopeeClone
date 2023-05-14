@@ -9,32 +9,20 @@ import Pagination from '../../components/Pagination'
 import { ProductListConfig } from '../../types/product.type'
 import { omitBy, isUndefined, omit } from 'lodash'
 import { categoryApi } from '../../apis/category.api'
+import { useQueryConfig } from '../../hooks/useQueryConfig/useQueryConfig'
 
 export type QueryConfig = {
   [key in keyof ProductListConfig]: string
 }
 export default function ProductList() {
-  const queryParams: QueryConfig = useQueryStringParams()
-  const queryConfig: QueryConfig = omitBy(
-    {
-      page: queryParams.page || '1',
-      category: queryParams.category,
-      exclude: queryParams.exclude,
-      limit: queryParams.limit || '10',
-      name: queryParams.name,
-      order: queryParams.order,
-      price_max: queryParams.price_max,
-      price_min: queryParams.price_min,
-      rating_filter: queryParams.rating_filter,
-      sort_by: queryParams.sort_by
-    },
-    isUndefined
-  )
+  const queryConfig = useQueryConfig()
   const { data: productsData } = useQuery({
     queryKey: [queryKey.products.productList, queryConfig],
     queryFn: () => productApi.getProductList(queryConfig as ProductListConfig),
+    staleTime: 3 * 60 * 1000,
     keepPreviousData: true
   })
+
   const { data: categoryData } = useQuery({
     queryKey: [queryKey.categories, queryConfig],
     queryFn: () => categoryApi.getCategories(),

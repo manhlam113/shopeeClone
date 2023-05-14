@@ -2,40 +2,67 @@ import { useQuery } from '@tanstack/react-query'
 import { queryKey } from '../../constants/query.key'
 import { productApi } from '../../apis/products.api'
 import { useParams } from 'react-router-dom'
-import classNames from 'classnames'
 import ProductRating from '../ProductList/components/ProductRating'
-import { formatNumberToCurrency, formatNumberToSocialStyle, rateSale } from '../../utils/utils'
+import { formatNumberToCurrency, formatNumberToSocialStyle, getNameIdfromURL, rateSale } from '../../utils/utils'
 import InputNumber from '../../components/InputNumber'
 import DOMPurify from 'dompurify'
-import { useEffect, useMemo, useState } from 'react'
-import { Product } from '../../types/product.type'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { Product as ProductType, ProductListConfig } from '../../types/product.type'
+import Product from '../ProductList/components/Product'
 export default function ProductDetail() {
+  const imageRef = useRef<HTMLImageElement>(null)
   const [activeImg, setActiveImg] = useState('')
   const [currentIndexImg, setCurrentIndexImg] = useState([0, 5])
   const { id } = useParams()
+  const nameId = getNameIdfromURL(id as string)
+  // const id = getNameIdfromURL(nameId as string)
+
   const { data: productDetail } = useQuery({
-    queryKey: [queryKey.products.productDetails],
-    queryFn: () => productApi.getProductItem(id as string)
+    queryKey: [queryKey.products.productDetails, nameId],
+    queryFn: () => productApi.getProductItem(nameId)
   })
+
   const product = productDetail?.data.data
   const currentImgs = useMemo(
     () => (product ? product?.images.slice(...currentIndexImg) : []),
     [product, currentIndexImg]
   )
+
+  const queryConfig: ProductListConfig = { limit: '10', category: product?.category._id, page: '1' }
+  const { data: productsData } = useQuery({
+    queryKey: [queryKey.products.productList, queryConfig],
+    queryFn: () => productApi.getProductList(queryConfig as ProductListConfig),
+    staleTime: 3 * 60 * 1000
+  })
   useEffect(() => {
     if (product && product.images.length > 0) setActiveImg(product?.images[0])
   }, [product])
   if (!product) return null
-  console.log()
   const handlePrevImg = () => {
     if (currentIndexImg[0] > 0) {
       setCurrentIndexImg((prev) => [prev[0] - 1, prev[1] - 1])
     }
   }
   const handleNextImg = () => {
-    if (currentIndexImg[1] < (product as Product).images.length) {
+    if (currentIndexImg[1] < (product as ProductType).images.length) {
       setCurrentIndexImg((prev) => [prev[0] + 1, prev[1] + 1])
     }
+  }
+  const handleOnMouseMove = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const img = imageRef.current as HTMLImageElement
+    const rect = event.currentTarget.getBoundingClientRect()
+    const { naturalWidth, naturalHeight } = img
+    img.style.width = naturalWidth + 'px'
+    img.style.height = naturalHeight + 'px'
+    img.style.maxWidth = 'unset'
+    const { offsetX, offsetY } = event.nativeEvent
+    const top = offsetY * (1 - naturalHeight / rect.height)
+    const left = offsetX * (1 - naturalHeight / rect.height)
+    img.style.top = top + 'px'
+    img.style.left = left + 'px'
+  }
+  const handleRemoveZoom = () => {
+    imageRef.current?.removeAttribute('style')
   }
   return (
     <div className='bg-[#f5f5f5] p-4'>
@@ -43,8 +70,17 @@ export default function ProductDetail() {
         <div className='bg-white p-4'>
           <div className='grid grid-cols-12 gap-6'>
             <div className='col-span-5'>
-              <div className='relative w-full pt-[100%]'>
-                <img src={activeImg} alt='' className='absolute left-0 top-0 h-full w-full bg-white object-cover' />
+              <div
+                className='relative w-full cursor-zoom-in overflow-hidden pt-[100%]'
+                onMouseMove={handleOnMouseMove}
+                onMouseLeave={handleRemoveZoom}
+              >
+                <img
+                  src={activeImg}
+                  alt=''
+                  className='pointer-events-none absolute left-0 top-0 h-full w-full bg-white object-cover'
+                  ref={imageRef}
+                />
               </div>
               <div className='relative mt-6 grid grid-cols-5 gap-2'>
                 <button
@@ -182,19 +218,28 @@ export default function ProductDetail() {
             </div>
           </div>
         </div>
-        <div className=''>
-          <div className='mt-8 bg-white p-4 shadow'>
-            <div className='container'>
-              <div className='rounded bg-gray-50 p-4 text-lg capitalize text-slate-700'>Mô tả sản phẩm</div>
-              <div className='mx-4 mb-4 mt-12 text-sm leading-loose'>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(product.description)
-                  }}
-                />
-              </div>
+
+        <div className='mt-8 bg-white p-4 shadow'>
+          <div className='container'>
+            <div className='rounded bg-gray-50 p-4 text-lg capitalize text-slate-700'>Mô tả sản phẩm</div>
+            <div className='mx-4 mb-4 mt-12 text-sm leading-loose'>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(product.description)
+                }}
+              />
             </div>
           </div>
+        </div>
+        <div className='mt-8'>
+          <div className='text-lg uppercase'>CÓ THỂ BẠN CŨNG THÍCH</div>
+          {productsData && (
+            <div className='mt-4 grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6'>
+              {productsData.data.data.products.map((productItem) => (
+                <Product key={productItem._id} productItem={productItem}></Product>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

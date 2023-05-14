@@ -96,7 +96,8 @@ export const schema = yup.object({
       }
       return price_min !== '' || price_max !== ''
     }
-  })
+  }),
+  name: yup.string().trim().required('Tene san pham la bat buoc')
 })
 
 export type Schema = yup.InferType<typeof schema>

@@ -30,3 +30,17 @@ export const rateSale = (original: number, sale: number) => {
   const result = ((original - sale) / original) * 100
   return Math.floor(result) + '%'
 }
+export const removeSpecialCharacter = (str: string) =>
+  // eslint-disable-next-line no-useless-escape
+  str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g, '')
+
+export const generateURLProductDetail = (name: string, id: string) => {
+  const url = removeSpecialCharacter(name).replace(/\s/g, '-') + `-i-${id}`
+  return url
+}
+
+export const getNameIdfromURL = (URL: string) => {
+  const arr = URL.split('-')
+  const nameId = arr[arr.length - 1]
+  return nameId
+}
