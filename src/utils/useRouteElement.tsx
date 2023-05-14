@@ -8,6 +8,7 @@ import Profile from '../pages/Profile'
 import { useContext } from 'react'
 import { AppContext } from '../context/authenticated.context'
 import { path } from '../constants/path'
+import ProductDetail from '../pages/ProductDetail'
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
 
@@ -71,6 +72,15 @@ export default function useRouteElement() {
       element: (
         <MainLayout>
           <ProductList />
+        </MainLayout>
+      )
+    },
+    {
+      path: ':id',
+      index: true,
+      element: (
+        <MainLayout>
+          <ProductDetail />
         </MainLayout>
       )
     }

@@ -39,10 +39,23 @@ const renderPageNumber = (page: number, pageSize: number, queryConfig: QueryConf
     .fill(0)
     .map((_, index) => {
       const pageNumber = index + 1
-      if (page <= RANGE * 2 + 1 && pageNumber > page + RANGE && pageNumber < pageSize - RANGE + 1) {
+      /**
+       * Chia làm 3 trường hợp
+       * trường hợp 1: dấu 3 chấm đằng sau
+       *   Điều kiện: trang hiện tại phải <= 5 vì nếu lơn hơn > 5 thì đã rơi vào xuất hiện 3 chấm đằng trước, ko thỏa range = 2.
+       *              trang đang trong vòng lặp nằm trong khoảng [page + range,pageSize - range + 1]
+       *
+       *
+       */
+      if (page <= RANGE * 2 + 1 && pageNumber > page + RANGE && pageNumber < pageSize - 1) {
         return renderDotAfter(index)
       } else if (page > RANGE * 2 + 1 && page < pageSize - RANGE * 2) {
         if (pageNumber < page - RANGE && pageNumber > RANGE) {
+          // Nên nhớ đây là điều kiện cả 2
+          /**
+           * nghĩa là pageNumber phải nhỏ hơn pageCurrent - Range và nó là số lơn hơn 1 và 2
+           *
+           */
           return renderDotBefore(index)
         } else if (pageNumber > page + RANGE && pageNumber < pageSize - RANGE + 1) {
           return renderDotAfter(index)

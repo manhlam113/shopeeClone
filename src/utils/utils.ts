@@ -25,3 +25,8 @@ export const formatNumberToSocialStyle = (number: number) => {
 export type NoUndefinedField<T> = {
   [P in keyof T]-?: NoUndefinedField<NonNullable<T[P]>>
 }
+
+export const rateSale = (original: number, sale: number) => {
+  const result = ((original - sale) / original) * 100
+  return Math.floor(result) + '%'
+}

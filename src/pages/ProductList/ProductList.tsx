@@ -31,7 +31,7 @@ export default function ProductList() {
     isUndefined
   )
   const { data: productsData } = useQuery({
-    queryKey: [queryKey.products, queryConfig],
+    queryKey: [queryKey.products.productList, queryConfig],
     queryFn: () => productApi.getProductList(queryConfig as ProductListConfig),
     keepPreviousData: true
   })

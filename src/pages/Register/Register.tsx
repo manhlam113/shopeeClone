@@ -19,13 +19,14 @@ export type FormState = Schema
 
 export default function Register() {
   const { isAuthenticated, setIsAuthenticated } = useContext(AppContext)
+  const registerSchema = schema.pick(['email', 'password', 'confirm_password'])
   const {
     formState: { errors },
     register,
     setError,
     handleSubmit
   } = useForm<FormState>({
-    resolver: yupResolver(schema)
+    resolver: yupResolver(registerSchema)
   })
   const registerMutation = useMutation({
     mutationFn: (body: Omit<FormState, 'confirm_password'>) => authApi.registerAccount(body)
