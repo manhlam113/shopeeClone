@@ -9,6 +9,7 @@ import { useContext } from 'react'
 import { AppContext } from '../context/authenticated.context'
 import { path } from '../constants/path'
 import ProductDetail from '../pages/ProductDetail'
+import Cart from '../pages/Cart'
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
 
@@ -53,6 +54,14 @@ export default function useRouteElement() {
           element: (
             <MainLayout>
               <Profile />
+            </MainLayout>
+          )
+        },
+        {
+          path: path.cart,
+          element: (
+            <MainLayout>
+              <Cart />
             </MainLayout>
           )
         }

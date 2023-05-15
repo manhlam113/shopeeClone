@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { queryKey } from '../../constants/query.key'
 import { productApi } from '../../apis/products.api'
 import { useParams } from 'react-router-dom'
@@ -10,14 +10,17 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Product as ProductType, ProductListConfig } from '../../types/product.type'
 import Product from '../ProductList/components/Product'
 import QuantityController from '../../components/QuantityController'
+import purchasesApi from '../../apis/purchases.api'
+import { toast } from 'react-toastify'
+import { purchaseStatus } from '../../constants/purchase'
 export default function ProductDetail() {
   const imageRef = useRef<HTMLImageElement>(null)
   const [buyCount, setBuyCount] = useState(1)
   const [activeImg, setActiveImg] = useState('')
   const [currentIndexImg, setCurrentIndexImg] = useState([0, 5])
+  const queryClient = useQueryClient()
   const { id } = useParams()
   const nameId = getNameIdfromURL(id as string)
-  // const id = getNameIdfromURL(nameId as string)
 
   const { data: productDetail } = useQuery({
     queryKey: [queryKey.products.productDetails, nameId],
@@ -39,7 +42,7 @@ export default function ProductDetail() {
   useEffect(() => {
     if (product && product.images.length > 0) setActiveImg(product?.images[0])
   }, [product])
-  if (!product) return null
+
   const handlePrevImg = () => {
     if (currentIndexImg[0] > 0) {
       setCurrentIndexImg((prev) => [prev[0] - 1, prev[1] - 1])
@@ -69,6 +72,22 @@ export default function ProductDetail() {
   const handleRemoveZoom = () => {
     imageRef.current?.removeAttribute('style')
   }
+
+  const addProductToCartMutation = useMutation({
+    mutationFn: (body: { product_id: string; buy_count: number }) => purchasesApi.addProductToCart(body)
+  })
+  const handleAddProductToCart = () => {
+    addProductToCartMutation.mutate(
+      { product_id: product?._id as string, buy_count: buyCount },
+      {
+        onSuccess: () => {
+          toast.success('Thêm sản phẩm vào giỏ hàng thành công'),
+            queryClient.invalidateQueries(['purchases', { status: purchaseStatus.inCart }])
+        }
+      }
+    )
+  }
+  if (!product) return null
   return (
     <div className='bg-[#f5f5f5] p-4'>
       <div className='container'>
@@ -165,7 +184,10 @@ export default function ProductDetail() {
                 <div className='ml-6 text-sm text-gray-500'>{product.quantity} sản phẩm có sẵn</div>
               </div>
               <div className='mt-8 flex items-center'>
-                <button className='flex h-12 items-center justify-center rounded-sm border border-orange bg-orange/10 px-5 capitalize text-orange shadow-sm hover:bg-orange/5'>
+                <button
+                  className='flex h-12 items-center justify-center rounded-sm border border-orange bg-orange/10 px-5 capitalize text-orange shadow-sm hover:bg-orange/5'
+                  onClick={handleAddProductToCart}
+                >
                   <svg
                     enableBackground='new 0 0 15 15'
                     viewBox='0 0 15 15'

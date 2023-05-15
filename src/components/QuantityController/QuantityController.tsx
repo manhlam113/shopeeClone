@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import InputNumber, { InputProps } from '../InputNumber'
 
 interface QuantityControllerProps extends InputProps {
@@ -5,10 +6,19 @@ interface QuantityControllerProps extends InputProps {
   onIncrease?: (value: number) => void
   onDecrease?: (value: number) => void
   onType?: (value: number) => void
-  value: number
+  value?: number
 }
 
-export default function QuantityController({ max, onIncrease, onDecrease, onType, value }: QuantityControllerProps) {
+export default function QuantityController({
+  max,
+  onIncrease,
+  onDecrease,
+  onType,
+  value,
+  className = 'ml-10 flex items-center'
+}: QuantityControllerProps) {
+  const [localValue, setLocalValue] = useState(Number(value) || 1)
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let _value = Number(event.target.value)
     if (max !== undefined && _value > max) {
@@ -17,23 +27,26 @@ export default function QuantityController({ max, onIncrease, onDecrease, onType
       _value = 1
     }
     onType && onType(Number(_value))
+    setLocalValue(_value)
   }
   const decrease = () => {
-    let _value = Number(value) - 1
+    let _value = Number(value || localValue) - 1
     if (_value <= 0) {
       _value = 1
     }
     onDecrease && onDecrease(_value)
+    setLocalValue(_value)
   }
   const increase = () => {
-    let _value = Number(value) + 1
+    let _value = Number(value || localValue) + 1
     if (max !== undefined && _value > max) {
       _value = max
     }
     onIncrease && onIncrease(_value)
+    setLocalValue(_value)
   }
   return (
-    <div className='ml-10 flex items-center'>
+    <div className={className}>
       <button
         className='flex h-8 w-8 items-center justify-center rounded-l-sm border border-gray-300 text-gray-600'
         onClick={decrease}
@@ -50,7 +63,7 @@ export default function QuantityController({ max, onIncrease, onDecrease, onType
         </svg>
       </button>
       <InputNumber
-        value={value}
+        value={value || localValue}
         className=''
         classNameError='hidden'
         onChange={handleChange}

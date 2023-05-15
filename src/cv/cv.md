@@ -1,6 +1,6 @@
 # Lam Van Manh
 
-<img src="./public/images/me.jpg" width="120" style='border-radius: 10px; margin-bottom: 20px;'/>
+<img src="../../src/assets/images/avatar.JPG" width="500px" style='border-radius: 10px; margin-bottom: 20px;'/>
 
 - ⛑ **Name**: Lam Van Manh
 - 👶**Birthday**: 15/06/1999
@@ -8,7 +8,7 @@
 
 ## 🙋🏻‍♂️Brief introduction
 
-> Hi, I'm a front-end developer who can code all day without getting tired.
+> Hi, I'm a front-end developer who can code all day without getting tired. I have a big dream working in silicon valley. I know it's very unlikely right now, but keep dreaming, because no one is taxing your dreams.
 
 Hi everyone, my journey into web programming was by accident, I started it with a part-time job designing non-coding landing pages.
 
@@ -21,6 +21,8 @@ I was very lucky that just getting started, I had the opportunity to participate
 ### Shopee clone
 
 This is a project to clone the user page of the e-commerce platform [Shopee](https://shopee.com).
+
+> This project hasn't been finished yet, I am handling it.
 
 **Technologies used**: REST API, ReactJs, Typescript, Tailwindcss, React Router, React Hook Form, Yup, React Query, Vite, Vitest, Storybook, ESLint, Prettier, React Helmet
 
@@ -38,61 +40,65 @@ This is a project to clone the user page of the e-commerce platform [Shopee](htt
 - Unit Test
 - Manage components with Storybook
 
-**🔗Webiste**: [https://vercel.com](https://vercel.com)
+**🔗Github**: [https://github.com/manhlam113/shopeeClone](https://github.com/manhlam113/shopeeClone)
 
-**🔐Account for testing**: `user3@gmail.com` / `hackerlord`
+### Email App
 
-**🔗Github**: [https://github.com](https://github.com)
+This is my personal website to demo the email app, which I designed and coded myself when I just approach ReactJs
 
-### Portfolio
-
-This is my personal website to introduce myself, which I designed and coded myself. I also use this to post my blogs.
-
-**Technologies used**: ReactJs, Create React App, Styled Component, ESLint, Prettier, React Helmet, React Router
+**Technologies used**: ReactJs, Create React App, Tailwindcss, ESLint, Prettier, React Helmet, React Router
 
 **Functions include**:
 
-- Fully responsive website
-- Scoped CSS with Styled Component
+- CSS with tailwindcss
 - Linting with Prettier and ESLint
-- Improve SEO with React helmet
 - React Context is used to manage state.
+- React Router-dom to manage the router and outlet element
 - Code Splitting
+- Manage Component with react-router-dom
 
-**🔗Webiste**: [https://vercel.com](https://vercel.com)
+**🔗Webiste**: [https://email-app-murex.vercel.app/](https://email-app-murex.vercel.app/)
 
-**🔗Github**: [https://github.com](https://github.com)
+**🔗Github**: [https://github.com/manhlam113/email_app](https://github.com/manhlam113/email_app)
 
-### Booking Hotel Template
+### Healthcare
 
-A fully responsive website that I coded from a design file on the internet. This mini-website has 4 pages.
+A website that I coded from a design file on my project at school. This mini-website has 2 pages.
+One page for a demo to fill out MEDICAL DECLARATION
+(covid 19). One page to summarize statistics of the declarations that have been written by table
 
-**Technologies used**: HTML5, SASS, Bootstrap 5, Javascript
-
-**Functions include**:
-
-- Fully responsive website
-- Semantic HTML
-- Mega menu dropdown
-
-**🔗Webiste**: [https://vercel.com](https://vercel.com)
-
-**🔗Github**: [https://github.com](https://github.com)
-
-### Online Shop Template
-
-This was one of the first projects I did when I first learned web programming. I don't use any libraries, just use HTML and CSS to code a fully responsive website.
-
-**Technologies used**: HTML5, SASS, Javascript
+**Technologies used**: HTML5, SASS, Tailwindcss, Javascript
 
 **Functions include**:
 
-- Fully responsive website
+- Management Form with Yup
 - Semantic HTML
+- CRUD declarations that have been written by table
 
-**🔗Webiste**: [https://vercel.com](https://vercel.com)
+**🔗Webiste**: [https://health-care-olive.vercel.app](https://health-care-olive.vercel.app)
 
-**🔗Github**: [https://github.com](https://github.com)
+**🔗Github**: [https://github.com/manhlam113/health_care](https://github.com/manhlam113/health_care)
+
+### Learning and Development Web App
+
+This was the first project I did when I was working in an intern position in frontend web programming. I use Umijs souce base, and React Query to managage state. I also have joined to update code at Admin site with RefineJS source, it is so good to code CRUD functionality
+
+**Technologies used**: ReactJS, Umijs source base, Refine, React Query, Rich Text(Toast Editor)
+
+**Functions include**:
+
+- Web app for desktop, PC, and mobile is all ready to be released soon
+- Help a learner to create goals to study and develop
+- Summary current level of learner
+- Help admin to manage their student and get oriented immediately for learner
+
+> This source is private, I don't have full authorize to access it.
+
+## Working Experience
+
+- 05/02/2023 - 05/05/2023 at GEEKUP Company
+
+I have worked at this company in a Product front-end position, making response-ability to make beautiful UI, improve UX, and working with PA, and PD to make the decision final. Applying the Agile model for delivery product on hold journey
 
 ## 🔧Skills
 
@@ -104,13 +110,13 @@ I'm quite confident that I can catch up with other languages when needed very qu
 
 ### 💻Web Front-end Technologies
 
-React, React Query, RTK Query, Redux, Styled Components, TailwindCss, Sass, Webpack, Axios, Vite, Vitest, Mock Service Worker, HTML5, CSS3, SEO.
+React, React Query, RTK Query, Redux, Styled Components, TailwindCss, Sass, Webpack(learning...), Axios, Vite, Vitest, Mock Service Worker, HTML5, CSS3, SEO(learning...).
 
 ### 🧮Web Back-end Technologies
 
 - Protocols: REST, HTTP(S)
-- Frameworks/Libraries: Node.js, Json server
-- Cloud Services: Vercel, Netlify
+- Frameworks/Libraries: Laravel
+- Language: PHP
 
 ### 🔨Dev Tools
 
@@ -118,16 +124,17 @@ Git, Postman, Lighthouse, React Developer Tool, Redux Dev Tool, React Query Dev 
 
 ### 💁🏻‍♂️Industrial & Interpersonal Skills
 
-Write, Present, Teamwork, SEO, digital marketing.
+Present, Teamwork, Trading, Sport, Guitar, Selling.
 
 ## 🥇Honors & Awards
 
-- End of term scholarship (2022)
-- First semester scholarship (2021-2022)
+- TOEIC 635 in 2020
+- The Best Trainee at FPT SOFTWARE ACADEMY
+- Certification of Recognition
 
 ## 📚Education
 
-**TDTU TON DUC THANG Univeristy** - Communications and Computer networks (reserves the study results) 2017 - 2019
+**TDTU TON DUC THANG University** - Communications and Computer networks (reserves the study results) 2017 - 2019
 
 **OPEN HCM University** - Internation Bussiness, 2019 - 2023
 
@@ -144,8 +151,7 @@ Write, Present, Teamwork, SEO, digital marketing.
 
 - 📞Phone: 0375 461 022
 - 📧Email: [manhvanlam0699@gmail.com](mailto:manhvanlam0699@gmail.com)
-- ✍🏻Website: [https://duthanhduoc.com/](https://duthanhduoc.com/)
-- 🔗Github: [https://github.com/manhlam113]([https://github.com/manhlam113)
+- 🔗Github: [https://github.com/manhlam113](https://github.com/manhlam113)
 - 🔗Facebook: [https://www.facebook.com/vanmanh69/](https://www.facebook.com/vanmanh69/)
 
 ## 🙏🏻Thanks!
