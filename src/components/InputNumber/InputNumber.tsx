@@ -4,17 +4,21 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   errorMessage?: string
   classNameInput?: string
   classNameError?: string
+  /**
+   *
+   * Đây là những props được thêm vào khi tạo component InputNumber
+   */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }
 const InputNumber = forwardRef<HTMLInputElement, InputProps>(function InputNumberInner(
   {
     errorMessage,
-    className,
+    className, //props mặc định
     classNameInput = 'p-3 w-full outline-none border border-gray-300 focus:border-gray-500 rounded-sm focus:shadow-sm',
     classNameError = 'mt-1 text-red-600 min-h-[1.25rem] text-sm',
-    onChange,
-    value = '',
-    ...rest
+    onChange, //props mặc định
+    value = '', //props mặc định or ngoài truyền vào mặc định là chuỗi rỗng
+    ...rest //props mặc định
   },
   ref
 ) {
@@ -34,7 +38,14 @@ const InputNumber = forwardRef<HTMLInputElement, InputProps>(function InputNumbe
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
     if (/^\d+$/.test(value) || value === '') {
-      onChange && onChange(event)
+      //
+      onChange && onChange(event) //==> tương tự onchange của input nhưng đây là onChange của component InputNumber
+      /**
+       * Dòng onChange && onChange(event) => giống như là khi bên ngoài truuyeenf vào 1 hàm
+       *  thì ở đây sẽ nhận event => trả về cho cái hàm bên ngoài kia thực thi vậy
+       * giống như là đặt cảnh báo khi máy pha cà phê pha xong thì lấy cà phê ra
+       *
+       */
       setLocalValue(value)
     }
   }

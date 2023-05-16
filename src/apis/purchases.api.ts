@@ -14,8 +14,8 @@ const purchasesApi = {
   buyPurchases: (body: { product_id: string; buy_count: number }[]) => {
     return http.post<ResponseApiSuccess<Purchase[]>>(`${URL}/buy-products`, body)
   },
-  updateCart: (body: { product_id: string; buy_count: number }) => {
-    return http.post<ResponseApiSuccess<Purchase>>(`${URL}/update-purchase`, body)
+  updatePurchase(body: { product_id: string; buy_count: number }) {
+    return http.put<ResponseApiSuccess<Purchase>>(`${URL}/update-purchase`, body)
   },
   deleteCart: (purchaseIds: string[]) => {
     return http.delete<ResponseApiSuccess<{ deleted_count: number }>>(URL, {

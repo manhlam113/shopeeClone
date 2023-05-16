@@ -6,7 +6,7 @@ interface QuantityControllerProps extends InputProps {
   onIncrease?: (value: number) => void
   onDecrease?: (value: number) => void
   onType?: (value: number) => void
-  value?: number
+  onFocusOut?: (value: number) => void
 }
 
 export default function QuantityController({
@@ -14,19 +14,25 @@ export default function QuantityController({
   onIncrease,
   onDecrease,
   onType,
+  onFocusOut,
+  disabled,
   value,
   className = 'ml-10 flex items-center'
 }: QuantityControllerProps) {
-  const [localValue, setLocalValue] = useState(Number(value) || 1)
-
+  const [localValue, setLocalValue] = useState(Number(value) || 0)
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    /**
+     * Value này chỉ là value lấy từ props vào nếu mà k có thì lấy value từ state mình tạo vậy thui
+     *
+     *
+     */
     let _value = Number(event.target.value)
     if (max !== undefined && _value > max) {
       _value = max
-    } else if (_value <= 0) {
+    } else if (_value < 1) {
       _value = 1
     }
-    onType && onType(Number(_value))
+    onType && onType(_value)
     setLocalValue(_value)
   }
   const decrease = () => {
@@ -44,6 +50,10 @@ export default function QuantityController({
     }
     onIncrease && onIncrease(_value)
     setLocalValue(_value)
+  }
+  const handleBlur = (event: React.FocusEvent<HTMLInputElement, Element>) => {
+    const _value = Number(event.target.value)
+    onFocusOut && onFocusOut(_value)
   }
   return (
     <div className={className}>
@@ -66,7 +76,9 @@ export default function QuantityController({
         value={value || localValue}
         className=''
         classNameError='hidden'
+        disabled={disabled}
         onChange={handleChange}
+        onBlur={handleBlur}
         classNameInput='h-8 w-14 border-t border-b border-gray-300 p-1 text-center outline-none'
       />
       <button
