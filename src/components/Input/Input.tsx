@@ -19,7 +19,7 @@ export default function Input({
   name,
   ...rest
 }: InputProps) {
-  const registerResult = register && name ? register(name, rules) : {}
+  const registerResult = register && name ? register(name, rules) : null
   return (
     <div className={className}>
       <input className={classNameInput} {...rest} {...registerResult} />
