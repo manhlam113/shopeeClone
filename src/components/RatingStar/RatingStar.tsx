@@ -4,6 +4,24 @@ import { QueryConfig } from '../../pages/ProductList/ProductList'
 interface RatingStarProps {
   queryConfig: QueryConfig
 }
+/***
+ * Thuật toán Rating start
+ *   index = 0, index start = 0  => sao vàng
+ *   index = 0, index start = 1  => sao vàng
+ *   index = 0, index start = 2  => sao vàng
+ *   index = 0, index start = 3  => sao vàng
+ *   index = 0, index start = 4 => sao vàng
+ *   index = 0, index start = 5  => sao vàng
+ *
+ *   index = 1, index start = 0  => sao vàng
+ *   index = 1, index start = 1  => sao vàng
+ *   index = 1, index start = 2  => sao vàng
+ *   index = 1, index start = 3 => sao vàng
+ *   index = 1, index start = 4 => sao vàng
+ *   index = 1, index start = 5 => sao trắng
+ *
+ *
+ */
 export default function RatingStar({ queryConfig }: RatingStarProps) {
   const navigator = useNavigate()
   const handleRatingFilter = (ratingFilter: number) => {

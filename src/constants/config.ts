@@ -1,3 +1,4 @@
 export const config = {
-  baseURL: 'https://api-ecom.duthanhduoc.com/'
+  baseURL: 'https://api-ecom.duthanhduoc.com/',
+  maxSizeImage: 1048576
 }

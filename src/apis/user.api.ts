@@ -2,9 +2,9 @@ import { User } from '../types/user.type'
 import { ResponseApiSuccess } from '../types/utils.type'
 import http from '../utils/http'
 
-interface BodyUpdateProfile extends Omit<User, '_id' | 'email' | 'createdAt' | 'roles' | 'updatedAt'> {
+interface BodyUpdateProfile extends Omit<User, '_id' | 'roles' | 'createdAt' | 'updatedAt' | 'email'> {
   password?: string
-  new_password?: string
+  newPassword?: string
 }
 
 const URL = 'user'

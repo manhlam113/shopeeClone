@@ -74,7 +74,7 @@ export default function Register() {
                 register={register}
                 type='password'
                 errorMessage={errors.password?.message}
-                className='mt-3'
+                className='relative mt-3 '
                 placeholder='Password'
               />
               <Input
@@ -82,7 +82,7 @@ export default function Register() {
                 register={register}
                 type='password'
                 errorMessage={errors.confirm_password?.message}
-                className='mt-3'
+                className='relative mt-3 '
                 placeholder='Confirm Password'
               />
               <div className='mt-3'>

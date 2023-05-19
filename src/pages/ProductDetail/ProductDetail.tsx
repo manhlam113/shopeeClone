@@ -40,6 +40,7 @@ export default function ProductDetail() {
     queryFn: () => productApi.getProductList(queryConfig as ProductListConfig),
     staleTime: 3 * 60 * 1000
   })
+
   useEffect(() => {
     if (product && product.images.length > 0) setActiveImg(product?.images[0])
   }, [product])

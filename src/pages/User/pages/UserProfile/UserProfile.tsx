@@ -13,6 +13,8 @@ import { AppContext } from '../../../../context/authenticated.context'
 import { setProfileToLocalStorage } from '../../../../utils/utils.auth'
 import { getAvatarUrl, isAxiosUnprocessableEntity } from '../../../../utils/utils'
 import { ResponseApiFail } from '../../../../types/utils.type'
+import { config } from '../../../../constants/config'
+import InputFile from '../../../../components/InputFile'
 type FormData = Pick<UserSchema, 'name' | 'address' | 'phone' | 'date_of_birth' | 'avatar'>
 type FormDataError = Omit<FormData, 'date_of_birth'> & {
   date_of_birth: string
@@ -43,7 +45,6 @@ export default function UserProfile() {
     resolver: yupResolver(profileSchema)
   })
   const avatarImage = watch('avatar')
-  const fileInputRef = useRef<HTMLInputElement>(null)
   const { data, refetch } = useQuery({
     queryFn: () => userApi.getUserProfile()
   })
@@ -88,8 +89,6 @@ export default function UserProfile() {
     } catch (error) {
       if (isAxiosUnprocessableEntity<ResponseApiFail<FormDataError>>(error)) {
         const formError = error.response?.data.data
-        console.log(formError)
-
         if (formError) {
           Object.keys(formError).forEach((key) => {
             setError(key as keyof FormDataError, {
@@ -101,15 +100,9 @@ export default function UserProfile() {
       }
     }
   })
-  const handleUpload = () => {
-    fileInputRef.current?.click()
+  const handleChangFile = (file?: File) => {
+    setFile(file)
   }
-
-  const handleFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const fileUpload = event.target.files?.[0]
-    setFile(fileUpload)
-  }
-
   return (
     <div className='rounded-sm bg-white px-2 pb-10 shadow md:px-7 md:pb-20'>
       <div className='border-b border-b-gray-200 py-6'>
@@ -199,20 +192,7 @@ export default function UserProfile() {
                 className='h-full w-full rounded-full object-cover'
               />
             </div>
-            <input
-              className='hidden'
-              type='file'
-              accept='.jpg,.jpeg,.png'
-              ref={fileInputRef}
-              onChange={handleFileInputChange}
-            />
-            <button
-              className='flex h-10 items-center justify-end rounded-sm border bg-white px-6 text-sm text-gray-600 shadow-sm'
-              type='button'
-              onClick={handleUpload}
-            >
-              Chọn ảnh
-            </button>
+            <InputFile onChange={handleChangFile}></InputFile>
             <div className='mt-3 text-gray-400'>
               <div>Dụng lượng file tối đa 1 MB</div>
               <div>Định dạng:.JPEG, .PNG</div>
