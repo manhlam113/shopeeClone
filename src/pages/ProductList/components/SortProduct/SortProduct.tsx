@@ -11,7 +11,7 @@ interface SortProduct {
   pageSize: number
 }
 export default function SortProduct(props: SortProduct) {
-  const navigator = useNavigate('home')
+  const navigator = useNavigate()
   const { queryConfig, pageSize } = props
   const page = Number(queryConfig.page)
   const { sort_by = sortBy.createdAt, order } = queryConfig

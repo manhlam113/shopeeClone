@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { path } from '../../../../constants/path'
 import { AppContext } from '../../../../context/authenticated.context'
