@@ -7,8 +7,7 @@ export default function CartHeader() {
   const { register, onSubmit } = useSearchInputHook()
   return (
     <div className='border-b border-b-black/10'>
-      <div className='bg-orange text-white py-2'
-      >
+      <div className='bg-orange py-2 text-white'>
         <div className='container'>
           <NavHeader />
         </div>

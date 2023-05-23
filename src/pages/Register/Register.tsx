@@ -19,7 +19,7 @@ import { Helmet } from 'react-helmet-async'
 export type FormState = Schema
 
 export default function Register() {
-  const { isAuthenticated, setIsAuthenticated } = useContext(AppContext)
+  const { setIsAuthenticated } = useContext(AppContext)
   const registerSchema = schema.pick(['email', 'password', 'confirm_password'])
   const {
     formState: { errors },

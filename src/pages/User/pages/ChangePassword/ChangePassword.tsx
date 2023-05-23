@@ -4,7 +4,7 @@ import { UserSchema, userSchema } from '../../../../utils/rules'
 import Button from '../../../../components/Button/Button'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { userApi } from '../../../../apis/user.api'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import omit from 'lodash/omit'
 import { toast } from 'react-toastify'
 import { isAxiosUnprocessableEntity } from '../../../../utils/utils'
@@ -17,8 +17,7 @@ export default function ChangePassword() {
     formState: { errors },
     handleSubmit,
     setError,
-    reset,
-    watch
+    reset
   } = useForm<FormData>({
     defaultValues: {
       confirm_password: '',

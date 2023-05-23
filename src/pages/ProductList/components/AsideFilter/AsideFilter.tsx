@@ -20,7 +20,7 @@ interface AsideFilterProps {
 type FormData = NoUndefinedField<Pick<Schema, 'price_min' | 'price_max'>>
 const priceSchema = schema.pick(['price_min', 'price_max'])
 export default function AsideFilter({ category, queryConfig }: AsideFilterProps) {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   const navigator = useNavigate()
   const categoryParams = queryConfig.category
   const {

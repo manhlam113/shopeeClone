@@ -1,5 +1,3 @@
-import { Category } from './category.type'
-
 export interface Product {
   _id: string
   images: string[]

@@ -1,7 +1,7 @@
 import React, { createContext, useState } from 'react'
 import { getAccessTokenToLocalStorage, getProfileToLocalStorage } from '../utils/utils.auth'
 import { User } from '../types/user.type'
-import { ExtendsPurchases, Purchase } from '../types/purchases.type'
+import { ExtendsPurchases } from '../types/purchases.type'
 interface AppContextInterface {
   isAuthenticated: boolean
   setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>

@@ -13,6 +13,7 @@ describe('isAxiosError', () => {
         new AxiosError(undefined, undefined, undefined, undefined, {
           status: HttpStatusCode.UnprocessableEntity,
           data: null
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } as any)
       )
     ).toBe(true)
@@ -23,6 +24,7 @@ describe('isAxiosError', () => {
         new AxiosError(undefined, undefined, undefined, undefined, {
           status: HttpStatusCode.Unauthorized,
           data: null
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } as any)
       )
     ).toBe(true)
