@@ -14,6 +14,7 @@ import HistoryPurchase from '../pages/User/pages/HistoryPurchase'
 import ChangePassword from '../pages/User/pages/ChangePassword'
 import UserLayout from '../pages/User/layout'
 import UserProfile from '../pages/User/pages/UserProfile'
+import NotFound from '../pages/NotFound/NotFound'
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
 
@@ -108,6 +109,14 @@ export default function useRouteElement() {
       element: (
         <MainLayout>
           <ProductDetail />
+        </MainLayout>
+      )
+    },
+    {
+      path: '*',
+      element: (
+        <MainLayout>
+          <NotFound />
         </MainLayout>
       )
     }

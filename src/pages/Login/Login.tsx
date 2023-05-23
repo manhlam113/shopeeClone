@@ -11,6 +11,7 @@ import { AppContext } from '../../context/authenticated.context'
 import Button from '../../components/Button/Button'
 import { path } from '../../constants/path'
 import authApi from '../../apis/auth.api'
+import { Helmet } from 'react-helmet-async'
 
 type FormState = Omit<Schema, 'confirm_password'>
 export default function Login() {
@@ -54,6 +55,10 @@ export default function Login() {
   })
   return (
     <div className='bg-orange'>
+      <Helmet>
+        <title>Đăng nhập | Login</title>
+        <meta name='description' content='Đây là trang login' />
+      </Helmet>
       <div className='container'>
         <div className='grid grid-cols-1 py-12 lg:grid-cols-5 lg:py-32 lg:pr-10'>
           <div className='lg:col-span-2 lg:col-start-4'>
@@ -77,6 +82,7 @@ export default function Login() {
               />
               <div className='mt-3'>
                 <Button
+                  type='submit'
                   isLoading={loginMutation.isLoading}
                   disabled={loginMutation.isLoading}
                   className='flex w-full items-center justify-center bg-red-500 px-2 py-4 text-white'

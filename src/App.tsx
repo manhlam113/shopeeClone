@@ -2,7 +2,9 @@ import { useContext, useEffect } from 'react'
 import useRouteElement from './utils/useRouteElement'
 import { ToastContainer } from 'react-toastify'
 import { LocalStorageEventTarget } from './utils/utils.auth'
-import { AppContext } from './context/authenticated.context'
+import { AppContext, AuthenticatedProvider } from './context/authenticated.context'
+import './i18n'
+import { HelmetProvider } from 'react-helmet-async'
 
 function App() {
   const routeElement = useRouteElement()
@@ -14,8 +16,12 @@ function App() {
   }, [reset])
   return (
     <div>
-      {routeElement}
-      <ToastContainer />
+      <HelmetProvider>
+        <AuthenticatedProvider>
+          {routeElement}
+          <ToastContainer />
+        </AuthenticatedProvider>
+      </HelmetProvider>
     </div>
   )
 }

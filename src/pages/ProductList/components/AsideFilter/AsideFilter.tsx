@@ -11,8 +11,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Schema, schema } from '../../../../utils/rules'
 import { NoUndefinedField } from '../../../../utils/utils'
 import RatingStar from '../../../../components/RatingStar'
-import { omit } from 'lodash'
-
+import omit from 'lodash/omit'
+import { useTranslation } from 'react-i18next'
 interface AsideFilterProps {
   queryConfig: QueryConfig
   category: Category[]
@@ -20,12 +20,14 @@ interface AsideFilterProps {
 type FormData = NoUndefinedField<Pick<Schema, 'price_min' | 'price_max'>>
 const priceSchema = schema.pick(['price_min', 'price_max'])
 export default function AsideFilter({ category, queryConfig }: AsideFilterProps) {
+  const { t, i18n } = useTranslation()
   const navigator = useNavigate()
   const categoryParams = queryConfig.category
   const {
     handleSubmit,
     control,
     trigger,
+    reset,
     formState: { errors }
   } = useForm<FormData>({
     resolver: yupResolver(priceSchema),
@@ -49,6 +51,7 @@ export default function AsideFilter({ category, queryConfig }: AsideFilterProps)
     })
   })
   const handleRemoveAll = () => {
+    reset()
     navigator({
       pathname: path.home,
       search: createSearchParams(omit(queryConfig, ['price_min', 'price_max', 'rating_filter', 'category'])).toString()
@@ -75,7 +78,7 @@ export default function AsideFilter({ category, queryConfig }: AsideFilterProps)
             </g>
           </g>
         </svg>
-        Tất Cả Danh Mục
+        {t('aside filter.all categories')}
       </Link>
       <div className='my-4 h-[1px] bg-gray-300' />
       <ul>
@@ -134,11 +137,11 @@ export default function AsideFilter({ category, queryConfig }: AsideFilterProps)
             />
           </g>
         </svg>
-        Bộ lọc tìm kiếm
+        {t('aside filter.filter categories')}
       </Link>
       <div className='my-4 h-[1px] bg-gray-300' />
       <div className='my-5'>
-        <div className='my-2 mr-2 font-bold'>Khoảng giá</div>
+        <div className='my-2 mr-2 font-bold'>{t('aside filter.price range')}</div>
         <form className='mt-2' onSubmit={onSubmit}>
           <div className='flex items-start'>
             <Controller
@@ -182,19 +185,19 @@ export default function AsideFilter({ category, queryConfig }: AsideFilterProps)
           </div>
           <div className='h-[1.25rem] text-center text-sm text-red-500'>{errors.price_max?.message}</div>
           <Button className='flex w-full items-center justify-center bg-orange p-2 text-sm uppercase text-white hover:bg-orange/80'>
-            Áp dụng
+            {t('aside filter.apply')}
           </Button>
         </form>
       </div>
       <div className='my-4 h-[1px] bg-gray-300' />
-      <div className='text-sm'>Đánh giá</div>
+      <div className='text-sm'>{t('aside filter.rating')}</div>
       <RatingStar queryConfig={queryConfig} />
       <div className='my-4 h-[1px] bg-gray-300' />
       <Button
         className='flex w-full items-center justify-center bg-orange p-2 text-sm uppercase text-white hover:bg-orange/80'
         onClick={handleRemoveAll}
       >
-        Xóa tất cả
+        {t('aside filter.delete all')}
       </Button>
     </div>
   )

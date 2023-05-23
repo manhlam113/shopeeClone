@@ -2,6 +2,7 @@ import axios, { AxiosError } from 'axios'
 import HttpStatusCode from '../constants/httpCode'
 import userImage from '../assets/images/user.svg'
 import { config } from '../constants/config'
+import { ResponseApiFail } from '../types/utils.type'
 export const isAxiosError = <T>(error: unknown): error is AxiosError<T> => {
   // eslint-disable-next-line import/no-named-as-default-member
   return axios.isAxiosError(error)
@@ -10,7 +11,15 @@ export const isAxiosError = <T>(error: unknown): error is AxiosError<T> => {
 export const isAxiosUnprocessableEntity = <FormError>(error: unknown): error is AxiosError<FormError> => {
   return isAxiosError(error) && error.response?.status === HttpStatusCode.UnprocessableEntity
 }
-
+export const isAxiosUnauthorized = <FormError>(error: unknown): error is AxiosError<FormError> => {
+  return isAxiosError(error) && error.response?.status === HttpStatusCode.Unauthorized
+}
+export const isAxiosExpireToken = <FormError>(error: unknown): error is AxiosError<FormError> => {
+  return (
+    isAxiosUnauthorized<ResponseApiFail<{ message: string; name: string }>>(error) &&
+    error.response?.data.data?.name === 'EXPIRED_TOKEN'
+  )
+}
 export const formatNumberToCurrency = (number: number) => {
   return new Intl.NumberFormat('de-DE').format(number)
 }

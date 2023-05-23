@@ -13,6 +13,8 @@ import QuantityController from '../../components/QuantityController'
 import purchasesApi from '../../apis/purchases.api'
 import { toast } from 'react-toastify'
 import { purchaseStatus } from '../../constants/purchase'
+import { Helmet } from 'react-helmet-async'
+import { convert } from 'html-to-text'
 export default function ProductDetail() {
   const imageRef = useRef<HTMLImageElement>(null)
   const navigator = useNavigate()
@@ -102,6 +104,18 @@ export default function ProductDetail() {
   if (!product) return null
   return (
     <div className='bg-[#f5f5f5] p-4'>
+      <Helmet>
+        <title>{product.name}</title>
+        <meta
+          name='description'
+          content={convert(product.description, {
+            limits: {
+              ellipsis: '...',
+              maxInputLength: 120
+            }
+          })}
+        />
+      </Helmet>
       <div className='container'>
         <div className='bg-white p-4'>
           <div className='grid grid-cols-12 gap-6'>

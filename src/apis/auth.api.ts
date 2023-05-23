@@ -1,4 +1,5 @@
 import { AuthResponse } from '../types/auth.type'
+import { ResponseApiSuccess } from '../types/utils.type'
 import http from '../utils/http'
 
 const authApi = {
@@ -10,6 +11,9 @@ const authApi = {
   },
   logOut: () => {
     return http.post('/logout')
+  },
+  refreshToken: (body: { refresh_token: string }) => {
+    return http.post<ResponseApiSuccess<{ access_token: string }>>('/refresh-access-token', body)
   }
 }
 export default authApi

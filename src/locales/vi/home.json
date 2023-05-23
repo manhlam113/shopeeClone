@@ -1,0 +1,19 @@
+{
+  "aside filter": {
+    "all categories": "Tất cả danh mục",
+    "filter categories": "Bộ lọc tìm kiếm",
+    "price range": "Khoảng giá",
+    "rating": "Đánh giá",
+    "delete all": "Xóa tất cả",
+    "apply": "Áp dụng"
+  },
+  "sort product list": {
+    "products by": "Sản phẩm theo",
+    "popular": "Phổ biến",
+    "newest": "Mới nhất",
+    "selling": "Bán chạy",
+    "price": "Gía",
+    "price low to high": "Gía: giá thấp đến cao",
+    "price high to low": "Gía: giá cao đến thấp"
+  }
+}

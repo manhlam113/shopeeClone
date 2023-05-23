@@ -3,11 +3,13 @@ import { Product as ProductType } from '../../../../types/product.type'
 import { formatNumberToCurrency, formatNumberToSocialStyle, generateURLProductDetail } from '../../../../utils/utils'
 import ProductRating from '../ProductRating'
 import { path } from '../../../../constants/path'
+
 type ProductItem = {
   productItem: ProductType
 }
 export default function Product(props: ProductItem) {
   const { productItem } = props
+
   return (
     <Link to={`${path.home}${generateURLProductDetail(productItem.name, productItem._id)}`}>
       <div className='overflow-hidden rounded-sm bg-white shadow transition-transform duration-100 hover:translate-y-[-0.04rem] hover:shadow-lg'>

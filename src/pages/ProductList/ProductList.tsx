@@ -3,13 +3,16 @@ import Product from './components/Product'
 import SortProduct from './components/SortProduct'
 import { queryKey } from '../../constants/query.key'
 import { productApi } from '../../apis/products.api'
-import useQueryStringParams from '../../hooks/useQueryStringParams/useQueryStringParams'
+// import useQueryStringParams from '../../hooks/useQueryStringParams/useQueryStringParams'
 import { useQuery } from '@tanstack/react-query'
 import Pagination from '../../components/Pagination'
 import { ProductListConfig } from '../../types/product.type'
-import { omitBy, isUndefined, omit } from 'lodash'
+// import omitBy from 'lodash/omitBy'
+// import isUndefined from 'lodash/isUndefined'
+// import omit from 'lodash/omit'
 import { categoryApi } from '../../apis/category.api'
 import { useQueryConfig } from '../../hooks/useQueryConfig/useQueryConfig'
+import { Helmet } from 'react-helmet-async'
 
 export type QueryConfig = {
   [key in keyof ProductListConfig]: string
@@ -31,6 +34,10 @@ export default function ProductList() {
 
   return (
     <div className='py-6'>
+      <Helmet>
+        <title>Trang chủ shopee</title>
+        <meta name='description' content='Đây là trang danh sách sản phẩm' />
+      </Helmet>
       <div className='container'>
         <div className='grid grid-cols-12 gap-6'>
           <div className='col-span-3'>

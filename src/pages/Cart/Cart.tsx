@@ -9,8 +9,9 @@ import QuantityController from '../../components/QuantityController'
 import { useContext, useEffect, useMemo } from 'react'
 import { Purchase } from '../../types/purchases.type'
 import { produce } from 'immer'
-import { keyBy } from 'lodash'
+import keyBy from 'lodash/keyBy'
 import { AppContext } from '../../context/authenticated.context'
+import { Helmet } from 'react-helmet-async'
 
 export default function Cart() {
   const { extendPurchases, setExtendPurchases } = useContext(AppContext)
@@ -135,6 +136,10 @@ export default function Cart() {
   }
   return (
     <div className='bg-neutral-100 py-16'>
+      <Helmet>
+        <title>Giỏ hàng | Cart</title>
+        <meta name='description' content='Đây là trang giỏ hàng' />
+      </Helmet>
       <div className='container'>
         {purchasesInCart && purchasesInCart.length > 0 ? (
           <>

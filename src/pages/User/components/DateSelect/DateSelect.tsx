@@ -1,4 +1,4 @@
-import { range } from 'lodash'
+import range from 'lodash/range'
 import { useState } from 'react'
 interface DateSelectProps {
   value?: Date
@@ -18,6 +18,11 @@ export default function DateSelect({ value, onChange, errorMessage }: DateSelect
       date: value?.getDate() || date.date,
       month: value?.getMonth() || date.month,
       year: value?.getFullYear() || date.year,
+      /**
+       * Chỗ này giúp giải queeyts vấn đề khi change date hoặc month hoặc year thì 2 filed còn lại sẽ bị
+       * reset do đó gán cho nó giá trị ngoài truyền vào trước (cụ thể là get từ server về để khi change no k bị reset lại)
+       *
+       */
       [name]: Number(valueSelect)
     }
     setDate(newDate)

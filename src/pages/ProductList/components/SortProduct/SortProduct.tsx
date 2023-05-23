@@ -2,17 +2,20 @@ import { QueryConfig } from '../../ProductList'
 import classNames from 'classnames'
 import { sortBy } from '../../../../constants/params'
 import { createSearchParams, useNavigate } from 'react-router-dom'
-import { omit } from 'lodash'
+import omit from 'lodash/omit'
 import { path } from '../../../../constants/path'
+import { useTranslation } from 'react-i18next'
+
 interface SortProduct {
   queryConfig: QueryConfig
   pageSize: number
 }
 export default function SortProduct(props: SortProduct) {
-  const navigator = useNavigate()
+  const navigator = useNavigate('home')
   const { queryConfig, pageSize } = props
   const page = Number(queryConfig.page)
   const { sort_by = sortBy.createdAt, order } = queryConfig
+  const { t } = useTranslation()
   const handleSortBy = (sortByValue: string) => {
     navigator({
       pathname: path.home,
@@ -60,7 +63,7 @@ export default function SortProduct(props: SortProduct) {
       <div className='bg-[rgba(0,0,0,.03)] p-2'>
         <div className='flex flex-wrap items-center justify-between gap-2'>
           <div className='flex items-center gap-2'>
-            <div>Sản phẩm theo</div>
+            <div>{t('sort product list.products by')}</div>
             <button
               onClick={() => handleSortBy(sortBy.view)}
               className={classNames('h-8 px-4 text-center text-sm capitalize ', {
@@ -68,7 +71,7 @@ export default function SortProduct(props: SortProduct) {
                 'bg-white text-black hover:bg-slate-100': sortBy.view !== sort_by
               })}
             >
-              Phổ biến
+              {t('sort product list.popular')}
             </button>
             <button
               onClick={() => handleSortBy(sortBy.createdAt)}
@@ -77,7 +80,7 @@ export default function SortProduct(props: SortProduct) {
                 'bg-white text-black hover:bg-slate-100': sortBy.createdAt !== sort_by
               })}
             >
-              Mới nhất
+              {t('sort product list.newest')}
             </button>
             <button
               onClick={() => handleSortBy(sortBy.sold)}
@@ -86,7 +89,7 @@ export default function SortProduct(props: SortProduct) {
                 'bg-white text-black hover:bg-slate-100': sortBy.sold !== sort_by
               })}
             >
-              Bán chạy
+              {t('sort product list.selling')}
             </button>
             <select
               className={classNames('h-8  px-4 text-left text-sm capitalize  outline-none ', {
@@ -98,13 +101,13 @@ export default function SortProduct(props: SortProduct) {
               onChange={handleChangePrice}
             >
               <option value='' className='bg-white text-black'>
-                Giá
+                {t('sort product list.price')}
               </option>
               <option value='asc' className='bg-white text-black'>
-                Giá: Thấp đến cao
+                {t('sort product list.price low to high')}
               </option>
               <option value='desc' className='bg-white text-black'>
-                Giá: Cao đến thấp
+                {t('sort product list.price high to low')}
               </option>
             </select>
           </div>

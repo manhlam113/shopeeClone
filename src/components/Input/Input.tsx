@@ -30,7 +30,6 @@ export default function Input({
     }
     return type
   }
-  console.log(openEye)
 
   return (
     <div className={className}>

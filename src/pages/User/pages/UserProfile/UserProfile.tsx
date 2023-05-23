@@ -13,7 +13,6 @@ import { AppContext } from '../../../../context/authenticated.context'
 import { setProfileToLocalStorage } from '../../../../utils/utils.auth'
 import { getAvatarUrl, isAxiosUnprocessableEntity } from '../../../../utils/utils'
 import { ResponseApiFail } from '../../../../types/utils.type'
-import { config } from '../../../../constants/config'
 import InputFile from '../../../../components/InputFile'
 type FormData = Pick<UserSchema, 'name' | 'address' | 'phone' | 'date_of_birth' | 'avatar'>
 type FormDataError = Omit<FormData, 'date_of_birth'> & {

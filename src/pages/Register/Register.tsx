@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation } from '@tanstack/react-query'
 
 import Input from '../../components/Input'
-import { omit } from 'lodash'
+import omit from 'lodash/omit'
 import { isAxiosUnprocessableEntity } from '../../utils/utils'
 import { ResponseApiFail } from '../../types/utils.type'
 import { useContext } from 'react'
@@ -14,6 +14,7 @@ import { AppContext } from '../../context/authenticated.context'
 import Button from '../../components/Button/Button'
 import { path } from '../../constants/path'
 import authApi from '../../apis/auth.api'
+import { Helmet } from 'react-helmet-async'
 
 export type FormState = Schema
 
@@ -56,6 +57,10 @@ export default function Register() {
 
   return (
     <div className='bg-orange'>
+      <Helmet>
+        <title>Đăng Ký | Register</title>
+        <meta name='description' content='Đây là trang Đăng ký' />
+      </Helmet>
       <div className='container'>
         <div className='grid grid-cols-1 py-12 lg:grid-cols-5 lg:py-32 lg:pr-10'>
           <div className='lg:col-span-2 lg:col-start-4'>
