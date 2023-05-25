@@ -1,6 +1,6 @@
 # Lam Van Manh
 
-<img src="../../src/assets/images/avatar.JPG" width="500px" style='border-radius: 10px; margin-bottom: 20px;'/>
+<img src="../../src/assets/images/avatar.JPG" width="300px" style='border-radius: 10px; margin-bottom: 20px;'/>
 
 - ⛑ **Name**: Lam Van Manh
 - 👶**Birthday**: 15/06/1999
@@ -8,7 +8,9 @@
 
 ## 🙋🏻‍♂️Brief introduction
 
-> Hi, I'm a front-end developer who can code all day without getting tired. I have a big dream working in silicon valley. I know it's very unlikely right now, but keep dreaming, because no one is taxing your dreams.
+> 🎖 Hi, I'm a front-end developer who can code all day without getting tired. I have a big dream working in silicon valley. I know it's very unlikely right now, but keep dreaming, because no one is taxing your dreams.
+
+> 🏅 I like the most quote: "The number of years of work does not fully reflect a person's experience, I can work equivalent to people with 1-2 years of experience, otherwise you do not need to pay me"
 
 Hi everyone, my journey into web programming was by accident, I started it with a part-time job designing non-coding landing pages.
 
@@ -21,8 +23,6 @@ I was very lucky that just getting started, I had the opportunity to participate
 ### Shopee clone
 
 This is a project to clone the user page of the e-commerce platform [Shopee](https://shopee.com).
-
-> This project hasn't been finished yet, I am handling it.
 
 **Technologies used**: REST API, ReactJs, Typescript, Tailwindcss, React Router, React Hook Form, Yup, React Query, Vite, Vitest, Storybook, ESLint, Prettier, React Helmet
 
@@ -40,26 +40,27 @@ This is a project to clone the user page of the e-commerce platform [Shopee](htt
 - Unit Test
 - Manage components with Storybook
 
+**🔗Webiste**: [https://shopee-clone-a61a.vercel.app/](https://shopee-clone-a61a.vercel.app/)
+
 **🔗Github**: [https://github.com/manhlam113/shopeeClone](https://github.com/manhlam113/shopeeClone)
 
-### Email App
+### Simple Movie
 
-This is my personal website to demo the email app, which I designed and coded myself when I just approach ReactJs
+This is my personal website to demo the Movie web app, which I designed and coded myself when I was just approached ReactJs. The website has one main page to display all films, when click each movie detail, it will direct you to a page detail. You can swiper movie to select.
 
-**Technologies used**: ReactJs, Create React App, Tailwindcss, ESLint, Prettier, React Helmet, React Router
+**Technologies used**: ReactJs, Vitejs, Tailwindcss, ESLint, Prettier, React Router
 
 **Functions include**:
 
 - CSS with tailwindcss
 - Linting with Prettier and ESLint
-- React Context is used to manage state.
 - React Router-dom to manage the router and outlet element
 - Code Splitting
 - Manage Component with react-router-dom
 
-**🔗Webiste**: [https://email-app-murex.vercel.app/](https://email-app-murex.vercel.app/)
+**🔗Webiste**: [https://react-simple-movie-part2.vercel.app/](https://react-simple-movie-part2.vercel.app/)
 
-**🔗Github**: [https://github.com/manhlam113/email_app](https://github.com/manhlam113/email_app)
+**🔗Github**: [https://github.com/manhlam113/react_simple_movie_part2](https://github.com/manhlam113/react_simple_movie_part2)
 
 ### Healthcare
 
@@ -81,7 +82,7 @@ One page for a demo to fill out MEDICAL DECLARATION
 
 ### Learning and Development Web App
 
-This was the first project I did when I was working in an intern position in frontend web programming. I use Umijs souce base, and React Query to managage state. I also have joined to update code at Admin site with RefineJS source, it is so good to code CRUD functionality
+This was the first project I did while working as an intern in front-end web programming. I use Umijs source base, and React Query to manage the state. I also have joined to update code at the Admin site with RefineJS source, it is so good to code CRUD functionality
 
 **Technologies used**: ReactJS, Umijs source base, Refine, React Query, Rich Text(Toast Editor)
 
@@ -92,13 +93,13 @@ This was the first project I did when I was working in an intern position in fro
 - Summary current level of learner
 - Help admin to manage their student and get oriented immediately for learner
 
-> This source is private, I don't have full authorize to access it.
+> This source is private, I don't have full authorization to access it.
 
 ## Working Experience
 
 - 05/02/2023 - 05/05/2023 at GEEKUP Company
 
-I have worked at this company in a Product front-end position, making response-ability to make beautiful UI, improve UX, and working with PA, and PD to make the decision final. Applying the Agile model for delivery product on hold journey
+I have worked at this company in a Product front-end position, making response-ability to make beautiful UI, improve UX, and working with PA, and PD to make the decision final. Applying the Agile model for delivery product on hold journey. In my team, I take responses to capture information with PA, and PD and then display them with all my team. After each sprint, I supported making a content presentation
 
 ## 🔧Skills
 
@@ -106,11 +107,11 @@ I have worked at this company in a Product front-end position, making response-a
 
 Javascript, TypeScript.
 
-I'm quite confident that I can catch up with other languages when needed very quickly.
+I'm pretty confident that I can catch up with other languages when needed very quickly.
 
 ### 💻Web Front-end Technologies
 
-React, React Query, RTK Query, Redux, Styled Components, TailwindCss, Sass, Webpack(learning...), Axios, Vite, Vitest, Mock Service Worker, HTML5, CSS3, SEO(learning...).
+React, React Query, RTK Query, Redux, Styled Components, TailwindCss, Sass, Webpack(learning...), Axios, Vite, Vitest, Mock Service Worker, HTML5, CSS3, SEO.
 
 ### 🧮Web Back-end Technologies
 
@@ -130,7 +131,7 @@ Present, Teamwork, Trading, Sport, Guitar, Selling.
 
 - TOEIC 635 in 2020
 - The Best Trainee at FPT SOFTWARE ACADEMY
-- Certification of Recognition
+- Certification of Recognition Intern Spring season
 
 ## 📚Education
 
@@ -141,7 +142,7 @@ Present, Teamwork, Trading, Sport, Guitar, Selling.
 ## 💋Languages
 
 - **English**
-  Read and understand specialized documents. Good communication. TOEIC certificated 635
+  Read and understand technical documents. Good communication. TOEIC certificated 635
 
 - **Vietnamese**
 
@@ -153,6 +154,7 @@ Present, Teamwork, Trading, Sport, Guitar, Selling.
 - 📧Email: [manhvanlam0699@gmail.com](mailto:manhvanlam0699@gmail.com)
 - 🔗Github: [https://github.com/manhlam113](https://github.com/manhlam113)
 - 🔗Facebook: [https://www.facebook.com/vanmanh69/](https://www.facebook.com/vanmanh69/)
+- 🔗LinkedIn: [https://www.linkedin.com/in/manh-lam-407a21274/](https://www.linkedin.com/in/manh-lam-407a21274/)
 
 ## 🙏🏻Thanks!
 
