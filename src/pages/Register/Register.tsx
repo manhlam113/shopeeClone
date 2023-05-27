@@ -19,7 +19,7 @@ import { Helmet } from 'react-helmet-async'
 export type FormState = Schema
 
 export default function Register() {
-  const { setIsAuthenticated } = useContext(AppContext)
+  const { setIsAuthenticated, setProfile } = useContext(AppContext)
   const registerSchema = schema.pick(['email', 'password', 'confirm_password'])
   const {
     formState: { errors },
@@ -36,7 +36,8 @@ export default function Register() {
   const onSubmit = handleSubmit((data) => {
     const body = omit(data, ['confirm_password'])
     registerMutation.mutate(body, {
-      onSuccess: () => {
+      onSuccess: (data) => {
+        setProfile(data.data.data.user)
         setIsAuthenticated(true)
       },
       onError: (error) => {

@@ -59,9 +59,3 @@ export default InputV2
 // }) {
 //   return null
 // }
-
-// const handleName: () => 'Duoc' = () => 'Duoc'
-
-// function App() {
-//   return <Hexa person={{ getName: handleName }} lastName='Duoc' />
-// }

@@ -137,6 +137,8 @@ Present, Teamwork, Trading, Sport, Guitar, Selling.
 
 **TDTU TON DUC THANG University** - Communications and Computer networks (reserves the study results) 2017 - 2019
 
+**FPT Software Academy** - Professional ReactJS Course - 2022
+
 **OPEN HCM University** - Internation Bussiness, 2019 - 2023
 
 ## 💋Languages
