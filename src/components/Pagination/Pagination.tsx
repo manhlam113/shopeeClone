@@ -47,7 +47,7 @@ const renderPageNumber = (page: number, pageSize: number, queryConfig: QueryConf
        *
        *
        */
-      if (page <= RANGE * 2 + 1 && pageNumber > page + RANGE && pageNumber < pageSize - 1) {
+      if (page <= RANGE * 2 + 1 && pageNumber > page + RANGE && pageNumber < pageSize - RANGE + 1) {
         return renderDotAfter(index)
       } else if (page > RANGE * 2 + 1 && page < pageSize - RANGE * 2) {
         if (pageNumber < page - RANGE && pageNumber > RANGE) {

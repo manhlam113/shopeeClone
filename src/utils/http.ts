@@ -144,7 +144,12 @@ export class Http {
           clearLS()
           this.accessToken = ''
           this.refreshToken = ''
-          toast.error(error.response?.data.data?.message || error.response?.data.message)
+
+          if (error.response?.data.message && error.response?.data.message === 'Token không được gửi') {
+            toast.error('Vui lòng đăng nhập hoặc đăng ký tài khoản để thực hiện chức năng')
+          } else {
+            toast.error(error.response?.data.data?.message || error.response?.data.message)
+          }
           // this.instance(error.response.config)
           /**Lỗi 401 có nhiều trường hợp
            *  1 là token heets hanj và url !==
